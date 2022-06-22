@@ -8,10 +8,16 @@
 import Foundation
 
 class MyGreeter {
-    init(){}
     
-    func GetGreetings(hour: Int) -> String {
-        var greeter = ""
+    var greeter = ""
+    var hour = 0
+    
+    init(){
+        greeter = ""
+        hour =  getDateHour()
+    }
+
+    func getGreetings() {
         if (hour >= 6 && hour < 12) { // after 6am and just before 12pm  "Good morning"
             greeter = "Good morning"
         } else if (hour >= 12 && hour < 18) {// after 12pm and just before 6pm " Good afternoon"
@@ -21,7 +27,19 @@ class MyGreeter {
         } else {
             greeter = "data error"
         }
-        return greeter
+        print(greeter) 
     }
     
+    //获取24小时制的hour
+    func getDateHour() -> Int {
+        return Calendar.current.component(.hour, from: Date.now)
+    }
+    
+    @discardableResult
+    func checkGreetValueExpected(aHour: Int) -> String {
+        hour = aHour
+        getGreetings()
+        return greeter
+    }
+
 }

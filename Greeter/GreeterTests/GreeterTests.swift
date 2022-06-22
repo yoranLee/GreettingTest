@@ -41,20 +41,22 @@ class GreeterTests: XCTestCase {
     }
     
     func testGreetingMsgIsExpected() {
-        let greeter1 = myGreeter.GetGreetings(hour: 6)
-        XCTAssertEqual(greeter1, "Good morning", "greeter message is wrong")
-        
-        let greeter2 = myGreeter.GetGreetings(hour: 12)
-        XCTAssertEqual(greeter2, "Good afternoon", "greeter message is wrong")
 
-        let greeter3 = myGreeter.GetGreetings(hour: 18)
-        XCTAssertEqual(greeter3, "Good evening", "greeter message is wrong")
+        myGreeter.checkGreetValueExpected(aHour: 6)
+        XCTAssertEqual(myGreeter.greeter, "Good morning", "greeter message is wrong")
+
+        myGreeter.checkGreetValueExpected(aHour: 12)
+        XCTAssertEqual(myGreeter.greeter, "Good afternoon", "greeter message is wrong")
+
+        myGreeter.checkGreetValueExpected(aHour: 18)
+        XCTAssertEqual(myGreeter.greeter, "Good evening", "greeter message is wrong")
+
+        myGreeter.checkGreetValueExpected(aHour: 0)
+        XCTAssertEqual(myGreeter.greeter, "Good evening", "greeter message is wrong")
         
-        let greeter4 = myGreeter.GetGreetings(hour: 0)
-        XCTAssertEqual(greeter4, "Good evening", "greeter message is wrong")
-        
-        let greeter5 = myGreeter.GetGreetings(hour: 100)
-        XCTAssertEqual(greeter5, "data error", "greeter message is wrong")
+        myGreeter.checkGreetValueExpected(aHour: 100)
+        XCTAssertEqual(myGreeter.greeter, "data error", "Score computed from guess is wrong")
+
     }
 
 }
